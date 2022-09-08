@@ -13,6 +13,8 @@ export const Area = styled.div`
 export const Header = styled.div`
   margin: 0;
   padding: 0;
+  font-size: 50px;
+  font-family: sans-serif;
   text-align: center;
   margin-bottom: 30px;
 `;
