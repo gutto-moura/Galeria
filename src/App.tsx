@@ -24,7 +24,7 @@ const App = () => {
         <C.Header>Galeria de Fotos</C.Header>
         {loading && 
         <C.ScreenWarning>
-          <div className="emoji">🔄</div>
+          <div className="emoji">⌛</div>
           <div>Carregando... </div>
         </C.ScreenWarning>
         }
