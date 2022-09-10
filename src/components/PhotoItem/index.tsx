@@ -7,7 +7,7 @@ import * as C from "./styles";
 export const PhotoItem = ({url, name}:Props) => {
   return(
     <C.Container>
-      <img src={url} />
+      <img src={url} alt= {name}/>
     </C.Container>
   )
 };

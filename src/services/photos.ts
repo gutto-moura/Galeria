@@ -18,3 +18,7 @@ export const getAll = async () => {
   }
   return list;
 }
+
+export const insert = async (file: File) => {
+  
+} 

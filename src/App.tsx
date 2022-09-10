@@ -1,12 +1,12 @@
-import { useState, useEffect } from "react"
-import { isTemplateExpression } from "typescript";
+import { useState, useEffect, FormEvent } from "react"
 import * as C from "./App.style";
 import * as Photos from "./services/photos";
 import { Photo } from "./types/Photos";
 import { PhotoItem } from "./components/PhotoItem";
 
 const App = () => {
-  // TEMPO : 01:00
+  // TEMPO : 01:13
+  const [uploading, setUploading] = useState(false)
   const [loading, setLoading] = useState(false);
   const [photos, setPhotos] = useState<Photo[]>([]);
 
@@ -18,10 +18,27 @@ const App = () => {
     };
     getPhotos();
   }, [])
+
+  const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+    const file = formData.get('image') as File; 
+
+    if(file && file.size > 0){
+      setLoading(true);
+
+      setLoading(false);
+    }
+  }
   return(
     <C.Container>
       <C.Area>
         <C.Header>Galeria de Fotos</C.Header>
+        <C.UploadForm method = "POST" onSubmit={handleFormSubmit}>
+          <input type="file" name="image" />
+          <input type="submit" value="Enviar" />
+        </C.UploadForm>
         {loading && 
         <C.ScreenWarning>
           <div className="emoji">⌛</div>
