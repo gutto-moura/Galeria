@@ -26,9 +26,17 @@ const App = () => {
     const file = formData.get('image') as File; 
 
     if(file && file.size > 0){
-      setLoading(true);
+      setUploading(true);
+      let result = await Photos.insert(file);
+      setUploading(false);
 
-      setLoading(false);
+      if(result instanceof Error){
+        alert(`${result.name} - ${result.message}`);
+      }else{
+        let newPhotoList = [...photos];
+        newPhotoList.push(result);
+        setPhotos(newPhotoList);
+      }
     }
   }
   return(
@@ -38,6 +46,7 @@ const App = () => {
         <C.UploadForm method = "POST" onSubmit={handleFormSubmit}>
           <input type="file" name="image" />
           <input type="submit" value="Enviar" />
+          {uploading && "Enviando..."}
         </C.UploadForm>
         {loading && 
         <C.ScreenWarning>
